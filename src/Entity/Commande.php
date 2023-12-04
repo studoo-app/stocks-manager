@@ -28,6 +28,12 @@ class Commande
     #[ORM\Column]
     private ?int $total = null;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $dateMaj = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $status = null;
+
     public function __construct()
     {
         $this->details = new ArrayCollection();
@@ -100,6 +106,30 @@ class Commande
     public function setTotal(int $total): static
     {
         $this->total = $total;
+
+        return $this;
+    }
+
+    public function getDateMaj(): ?\DateTimeImmutable
+    {
+        return $this->dateMaj;
+    }
+
+    public function setDateMaj(\DateTimeImmutable $dateMaj): static
+    {
+        $this->dateMaj = $dateMaj;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }
