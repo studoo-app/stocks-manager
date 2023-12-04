@@ -7,6 +7,7 @@
 L'application présente un système simple de commandes de produits.
 
 ## Missions
+
 L'objectif est de gérer/automatiser avec des évènements les tâches suivantes :
  - Automatiser la gestion des stocks
  - Construire des logs de suivi de commandes
