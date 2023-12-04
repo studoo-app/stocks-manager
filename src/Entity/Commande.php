@@ -4,8 +4,8 @@ namespace App\Entity;
 
 use App\Repository\CommandeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CommandeRepository::class)]
 class Commande
@@ -35,10 +35,14 @@ class Commande
     #[ORM\JoinColumn(nullable: false)]
     private ?Produit $produit = null;
 
+    #[ORM\Column]
+    #[Assert\LessThanOrEqual(propertyPath: 'produit.stock')]
+    private ?int $quantite = null;
+
     
     public function __construct()
     {
-        $this->details = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -114,6 +118,18 @@ class Commande
     public function setProduit(?Produit $produit): static
     {
         $this->produit = $produit;
+
+        return $this;
+    }
+
+    public function getQuantite(): ?int
+    {
+        return $this->quantite;
+    }
+
+    public function setQuantite(int $quantite): static
+    {
+        $this->quantite = $quantite;
 
         return $this;
     }

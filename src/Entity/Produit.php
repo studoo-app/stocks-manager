@@ -118,4 +118,9 @@ class Produit
 
         return $this;
     }
+
+    public function buildLabel(): string
+    {
+        return $this->nom . " - ".$this->getPrix() . " € (". $this->stock . "restant(s) )";
+    }
 }

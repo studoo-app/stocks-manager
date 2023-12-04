@@ -1,2 +1,28 @@
 framework:
-    workflows: null
+    workflows:
+        commande_status:
+            type: state_machine
+            audit_trail:
+                enabled: true
+            marking_store:
+                type: 'method'
+                property: 'status'
+            supports:
+                - App\Entity\Commande
+            initial_marking: 'Nouvelle'
+            places:
+                - 'Nouvelle'
+                - 'En cours de préparation'
+                - 'Prête'
+                - 'Envoyée'
+            transitions:
+                to_on_prepare:
+                    from: 'Nouvelle'
+                    to: 'En cours de préparation'
+                to_ready:
+                    from: 'En cours de préparation'
+                    to: 'Prête'
+                to_send:
+                    from: 'Prête'
+                    to: 'Envoyée'
+
