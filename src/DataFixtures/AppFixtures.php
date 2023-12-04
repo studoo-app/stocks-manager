@@ -59,7 +59,6 @@ class AppFixtures extends Fixture
         for($i=0; $i<5;$i++){
             $product = new Produit();
             $product->setNom(ucfirst($faker->word()));
-            $product->setDescription($faker->paragraph(2));
             $product->setPrix($faker->randomNumber(3, true));
             $product->setStock($faker->numberBetween(0, 10));
 

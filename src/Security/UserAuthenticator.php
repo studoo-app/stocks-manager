@@ -45,7 +45,7 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        $route = in_array('ROLE_CLIENT',$token->getRoleNames()) ? 'app_commande_new' : 'app_admin_produits_index';
+        $route = in_array('ROLE_CLIENT',$token->getRoleNames()) ? 'app_commande_new' : 'app_admin_dashboard';
         // For example:
         return new RedirectResponse($this->urlGenerator->generate($route));
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);

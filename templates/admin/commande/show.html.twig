@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande {{ commande.id }}{% endblock %}
+
+{% block body %}
+    <div class="row mt-5">
+        <div class="col">
+            <div class="card">
+                <div class="card-header h5">Commande n° {{ commande.id }}</div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <th>Id</th>
+                                <td>{{ commande.id }}</td>
+                            </tr>
+                            <tr>
+                                <th>Date</th>
+                                <td>{{ commande.date ? commande.date|date('Y-m-d H:i:s') : '' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Total</th>
+                                <td>{{ commande.total }}</td>
+                            </tr>
+                            <tr>
+                                <th>DateMaj</th>
+                                <td>{{ commande.dateMaj ? commande.dateMaj|date('Y-m-d H:i:s') : '' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Status</th>
+                                <td>{{ commande.status }}</td>
+                            </tr>
+                            <tr>
+                                <th>Quantite</th>
+                                <td>{{ commande.quantite }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-center">
+                    <a class="btn btn-danger" href="{{ path('app_admin_commande_index') }}">Retour</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+{% endblock %}
