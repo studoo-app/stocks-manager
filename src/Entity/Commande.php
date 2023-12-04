@@ -22,9 +22,6 @@ class Commande
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'commande', targetEntity: LigneCommande::class, orphanRemoval: true)]
-    private Collection $details;
-
     #[ORM\Column]
     private ?int $total = null;
 
@@ -34,6 +31,11 @@ class Commande
     #[ORM\Column(length: 255)]
     private ?string $status = null;
 
+    #[ORM\ManyToOne(inversedBy: 'commandes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Produit $produit = null;
+
+    
     public function __construct()
     {
         $this->details = new ArrayCollection();
@@ -64,36 +66,6 @@ class Commande
     public function setUser(?User $user): static
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, LigneCommande>
-     */
-    public function getDetails(): Collection
-    {
-        return $this->details;
-    }
-
-    public function addDetail(LigneCommande $detail): static
-    {
-        if (!$this->details->contains($detail)) {
-            $this->details->add($detail);
-            $detail->setCommande($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDetail(LigneCommande $detail): static
-    {
-        if ($this->details->removeElement($detail)) {
-            // set the owning side to null (unless already changed)
-            if ($detail->getCommande() === $this) {
-                $detail->setCommande(null);
-            }
-        }
 
         return $this;
     }
@@ -130,6 +102,18 @@ class Commande
     public function setStatus(string $status): static
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getProduit(): ?Produit
+    {
+        return $this->produit;
+    }
+
+    public function setProduit(?Produit $produit): static
+    {
+        $this->produit = $produit;
 
         return $this;
     }
