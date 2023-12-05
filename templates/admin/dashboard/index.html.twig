@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DashboardController!{% endblock %}
+
+{% block body %}
+    <div class="row mt-5">
+        {{ include('admin/dashboard/_commande_table.html.twig',{commandes:commandes.nouvelles,status:'Nouvelles'}) }}
+        {{ include('admin/dashboard/_commande_table.html.twig',{commandes:commandes.preparation,status:'En préparation'}) }}
+        {{ include('admin/dashboard/_commande_table.html.twig',{commandes:commandes.pretes,status:'Prêtes'}) }}
+        {{ include('admin/dashboard/_commande_table.html.twig',{commandes:commandes.envoyes,status:'Envoyées'}) }}
+    </div>
+{% endblock %}

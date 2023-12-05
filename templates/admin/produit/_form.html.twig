@@ -1,0 +1,20 @@
+<div class="row mt-5">
+    <div class="col-6 offset-3">
+        <div class="card">
+            <div class="card-header h5">{{ label }}</div>
+            {{ form_start(form) }}
+                <div class="card-body">
+                    {{ form_widget(form) }}
+                </div>
+                <div class="card-footer hstack gap-2 d-flex justify-content-center">
+                    <a class="btn btn-danger" href="{{ path('app_admin_produit_index') }}">Retour</a>
+                    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+
+
+
+

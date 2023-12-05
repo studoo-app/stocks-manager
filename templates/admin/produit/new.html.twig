@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Produit{% endblock %}
+
+{% block body %}
+    {{ include('admin/produit/_form.html.twig',{'button_label':'Valider',label:'Nouveau produit'}) }}
+{% endblock %}

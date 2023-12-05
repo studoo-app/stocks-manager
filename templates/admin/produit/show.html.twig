@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produit {{ produit.nom }}{% endblock %}
+
+{% block body %}
+
+    <div class="row mt-5">
+        <div class="col">
+            <div class="card">
+                <div class="card-header h5">Produit {{ produit.nom }}</div>
+                <div class="card-body">
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <th>Id</th>
+                                <td>{{ produit.id }}</td>
+                            </tr>
+                            <tr>
+                                <th>Nom</th>
+                                <td>{{ produit.nom }}</td>
+                            </tr>
+                            <tr>
+                                <th>Stock</th>
+                                <td>{{ produit.stock }}</td>
+                            </tr>
+                            <tr>
+                                <th>Prix</th>
+                                <td>{{ produit.prix }} €</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer hstack gap-2 d-flex justify-content-center">
+                    <a class="btn btn-danger" href="{{ path('app_admin_produit_index') }}">Retour</a>
+                    <a class="btn btn-primary" href="{{ path('app_admin_produit_edit', {'id': produit.id}) }}">edit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

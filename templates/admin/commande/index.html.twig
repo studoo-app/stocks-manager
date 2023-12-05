@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des commandes{% endblock %}
+
+{% block body %}
+    <div class="row mt-5">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">Liste des commandes</div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Date</th>
+                                <th>Total</th>
+                                <th>DateMaj</th>
+                                <th>Status</th>
+                                <th>Quantite</th>
+                                <th>actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for commande in commandes %}
+                                <tr>
+                                    <td>{{ commande.id }}</td>
+                                    <td>{{ commande.date ? commande.date|date('Y-m-d H:i:s') : '' }}</td>
+                                    <td>{{ commande.total }}</td>
+                                    <td>{{ commande.dateMaj ? commande.dateMaj|date('Y-m-d H:i:s') : '' }}</td>
+                                    <td>{{ commande.status }}</td>
+                                    <td>{{ commande.quantite }}</td>
+                                    <td>
+                                        <a href="{{ path('app_admin_commande_show', {'id': commande.id}) }}">show</a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="6">no records found</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
