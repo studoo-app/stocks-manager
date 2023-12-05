@@ -7,16 +7,16 @@ class CommandeWorkflowLog
 
     private ?int $id;
 
-    private \DateTimeImmutable $date;
+    private ?string $date;
     private ?string $status = null;
 
 
     /**
      * @param int|null $id
-     * @param \DateTimeImmutable|null $date
+     * @param string|null $date
      * @param string|null $status
      */
-    public function __construct(?int $id, ?\DateTimeImmutable $date, ?string $status)
+    public function __construct(?int $id, ?string $date, ?string $status)
     {
         $this->id = $id;
         $this->date = $date;
@@ -28,7 +28,7 @@ class CommandeWorkflowLog
         return $this->id;
     }
 
-    public function getDate(): \DateTimeImmutable
+    public function getDate(): ?string
     {
         return $this->date;
     }

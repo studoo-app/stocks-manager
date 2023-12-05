@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Commande;
 use App\Repository\CommandeRepository;
+use App\Service\WorkFlowLogService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -18,6 +19,7 @@ class CommandeController extends AbstractController
     public function __construct(
         // Symfony will inject the 'blog_publishing' workflow configured before
         private readonly WorkflowInterface $commandeStatusStateMachine,
+        private readonly WorkFlowLogService $service,
         private readonly EntityManagerInterface $manager
     ) {
     }
@@ -25,8 +27,10 @@ class CommandeController extends AbstractController
     #[Route('/{id}', name: 'app_admin_commande_show', methods: ['GET'])]
     public function show(Commande $commande): Response
     {
+        dump($this->service->getLogs($commande->getId()));
         return $this->render('admin/commande/show.html.twig', [
             'commande' => $commande,
+            'logs'=> $this->service->getLogs($commande->getId())
         ]);
     }
 
