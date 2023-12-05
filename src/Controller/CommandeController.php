@@ -37,7 +37,7 @@ class CommandeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->commandeStatusStateMachine->getMarking($commande);
-
+            $commande->calculateTotal();
             $commande->getProduit()->setStock($commande->getProduit()->getStock() - $commande->getQuantite());
             $this->manager->persist($commande);
             $this->manager->flush();

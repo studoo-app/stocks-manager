@@ -22,14 +22,6 @@ class CommandeController extends AbstractController
     ) {
     }
 
-    #[Route('/', name: 'app_admin_commande_index', methods: ['GET'])]
-    public function index(CommandeRepository $commandeRepository): Response
-    {
-        return $this->render('admin/commande/index.html.twig', [
-            'commandes' => $commandeRepository->findAll(),
-        ]);
-    }
-
     #[Route('/{id}', name: 'app_admin_commande_show', methods: ['GET'])]
     public function show(Commande $commande): Response
     {
@@ -38,40 +30,17 @@ class CommandeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/preparer', name: 'app_admin_commande_to_prepare')]
-    public function prepare(Commande $commande): RedirectResponse
+    #[Route('/{id}/{targetStatus}', name: 'app_admin_commande_workflow')]
+    public function workflow(Commande $commande,string $targetStatus): RedirectResponse
     {
-        if($this->commandeStatusStateMachine->can($commande,'to_prepare')){
-            $this->commandeStatusStateMachine->apply($commande,'to_prepare');
+        if($this->commandeStatusStateMachine->can($commande,$targetStatus)){
+            $this->commandeStatusStateMachine->apply($commande,$targetStatus);
+            $commande->updateDateMaj();
             $this->manager->persist($commande);
             $this->manager->flush();
         }
 
-        return $this->redirectToRoute('app_admin_commande_index',[]);
-    }
-
-    #[Route('/{id}/prete', name: 'app_admin_commande_to_ready')]
-    public function ready(Commande $commande): RedirectResponse
-    {
-        if($this->commandeStatusStateMachine->can($commande,'to_ready')){
-            $this->commandeStatusStateMachine->apply($commande,'to_ready');
-            $this->manager->persist($commande);
-            $this->manager->flush();
-        }
-
-        return $this->redirectToRoute('app_admin_commande_index',[]);
-    }
-
-    #[Route('/{id}/envoyee', name: 'app_admin_commande_to_send')]
-    public function send(Commande $commande): RedirectResponse
-    {
-        if($this->commandeStatusStateMachine->can($commande,'to_send')){
-            $this->commandeStatusStateMachine->apply($commande,'to_send');
-            $this->manager->persist($commande);
-            $this->manager->flush();
-        }
-
-        return $this->redirectToRoute('app_admin_commande_index',[]);
+        return $this->redirectToRoute('app_admin_dashboard');
     }
 
 }

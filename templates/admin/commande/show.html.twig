@@ -8,39 +8,57 @@
             <div class="card">
                 <div class="card-header h5">Commande n° {{ commande.id }}</div>
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <tbody>
-                            <tr>
-                                <th>Id</th>
-                                <td>{{ commande.id }}</td>
-                            </tr>
-                            <tr>
-                                <th>Date</th>
-                                <td>{{ commande.date ? commande.date|date('Y-m-d H:i:s') : '' }}</td>
-                            </tr>
-                            <tr>
-                                <th>Total</th>
-                                <td>{{ commande.total }}</td>
-                            </tr>
-                            <tr>
-                                <th>DateMaj</th>
-                                <td>{{ commande.dateMaj ? commande.dateMaj|date('Y-m-d H:i:s') : '' }}</td>
-                            </tr>
-                            <tr>
-                                <th>Status</th>
-                                <td>{{ commande.status }}</td>
-                            </tr>
-                            <tr>
-                                <th>Quantite</th>
-                                <td>{{ commande.quantite }}</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <th>Id</th>
+                                        <td>{{ commande.id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Date</th>
+                                        <td>{{ commande.date ? commande.date|date('Y-m-d H:i:s') : '' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Total</th>
+                                        <td>{{ commande.total }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>DateMaj</th>
+                                        <td>{{ commande.dateMaj ? commande.dateMaj|date('Y-m-d H:i:s') : '' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Status</th>
+                                        <td>{{ commande.status }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Quantite</th>
+                                        <td>{{ commande.quantite }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-2 vstack gap-2">
+                            {% if workflow_can(commande, 'to_prepare') %}
+                                <a href="{{ path('app_admin_commande_workflow',{id:commande.id,targetStatus:'to_prepare'}) }}" class="btn btn-secondary">Préparation</a>
+                            {% endif %}
+                            {% if workflow_can(commande, 'to_ready') %}
+                                <a href="{{ path('app_admin_commande_workflow',{id:commande.id,targetStatus:'to_ready'}) }}" class="btn btn-secondary">Prête</a>
+                            {% endif %}
+                            {% if workflow_can(commande, 'to_send') %}
+                                <a href="{{ path('app_admin_commande_workflow',{id:commande.id,targetStatus:'to_send'}) }}" class="btn btn-secondary">Envoyée</a>
+                            {% endif %}
+
+                        </div>
                     </div>
+
                 </div>
                 <div class="card-footer d-flex justify-content-center">
                     <a class="btn btn-danger" href="{{ path('app_admin_commande_index') }}">Retour</a>
+
                 </div>
             </div>
         </div>

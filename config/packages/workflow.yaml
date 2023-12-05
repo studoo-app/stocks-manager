@@ -16,7 +16,7 @@ framework:
                 - 'Prête'
                 - 'Envoyée'
             transitions:
-                to_on_prepare:
+                to_prepare:
                     from: 'Nouvelle'
                     to: 'En cours de préparation'
                 to_ready:

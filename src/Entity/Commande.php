@@ -39,12 +39,6 @@ class Commande
     #[Assert\LessThanOrEqual(propertyPath: 'produit.stock')]
     private ?int $quantite = null;
 
-    
-    public function __construct()
-    {
-
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -131,6 +125,18 @@ class Commande
     {
         $this->quantite = $quantite;
 
+        return $this;
+    }
+
+    public function updateDateMaj() : static
+    {
+        $this->dateMaj = new \DateTimeImmutable('now', new \DateTimeZone('Europe/Paris'));
+        return $this;
+    }
+
+    public function calculateTotal() : static
+    {
+        $this->total = $this->quantite * $this->produit->getPrix();
         return $this;
     }
 }

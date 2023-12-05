@@ -29,7 +29,7 @@ class CommandeType extends AbstractType
                 },
             ])
             ->add('quantite',IntegerType::class)
-            ->add('total',IntegerType::class)
+            //->add('total',IntegerType::class)
         ;
     }
 
