@@ -108,4 +108,8 @@ class Produit
     {
         return $this->nom . " - ".$this->getPrix() . " € (". $this->stock . "restant(s) )";
     }
+
+    public function updateStock(int $nb){
+        $this->stock = $this->stock - $nb;
+    }
 }

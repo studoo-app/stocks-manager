@@ -26,19 +26,19 @@ class CommandeController extends AbstractController
     public function new(Request $request): Response
     {
         $commande = new Commande();
-        $commande->setUser($this->getUser());
+//        $commande->setUser($this->getUser());
 
-        $now = new \DateTimeImmutable('NOW', new \DateTimeZone('Europe/Paris'));
-        $commande->setDate($now);
-        $commande->setDateMaj($now);
+//        $now = new \DateTimeImmutable('NOW', new \DateTimeZone('Europe/Paris'));
+//        $commande->setDate($now);
+//        $commande->setDateMaj($now);
 
         $form = $this->createForm(CommandeType::class, $commande);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->commandeStatusStateMachine->getMarking($commande);
-            $commande->calculateTotal();
-            $commande->getProduit()->setStock($commande->getProduit()->getStock() - $commande->getQuantite());
+//            $this->commandeStatusStateMachine->getMarking($commande);
+//            $commande->calculateTotal();
+//            $commande->getProduit()->setStock($commande->getProduit()->getStock() - $commande->getQuantite());
             $this->manager->persist($commande);
             $this->manager->flush();
 
